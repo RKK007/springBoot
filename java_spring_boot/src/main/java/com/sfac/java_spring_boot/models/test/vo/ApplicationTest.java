@@ -9,22 +9,18 @@ import org.springframework.stereotype.Component;
 @date:2020-08-10 15:52:03
 @description:
 */
-@Component//注册为主键
+@Component//注册为spring管理
 @PropertySource("classpath:config/applicationTest.properties")
 @ConfigurationProperties(prefix = "com.qq")//公共的前缀，使用了这个前缀就不再使用@Value注解了
 public class ApplicationTest {
 
     private int port;
 
-
     private String name;
-
 
     private int age;
 
-
     private String desc;
-
 
     private String random;
 

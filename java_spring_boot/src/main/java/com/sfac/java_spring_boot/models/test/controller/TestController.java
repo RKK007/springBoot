@@ -72,6 +72,7 @@ public class TestController {
     }
 
 
+
     //自定义配置文件测试
     /*    127.0.0.1:8086/test/config2      */
     @GetMapping("/config2")
@@ -84,6 +85,7 @@ public class TestController {
                 .append(at.getRandom()).append("----")
                 .append(at.getDesc()).append("----").toString();
     }
+
 
 
     //项目启动测试
