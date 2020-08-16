@@ -92,4 +92,18 @@ public class City {
 		this.country = country;
 	}
 
+	@Override
+	public String toString() {
+		return "City{" +
+				"cityId=" + cityId +
+				", cityName='" + cityName + '\'' +
+				", localCityName='" + localCityName + '\'' +
+				", countryId=" + countryId +
+				", district='" + district + '\'' +
+				", population=" + population +
+				", dateModified=" + dateModified +
+				", dateCreated=" + dateCreated +
+				", country=" + country +
+				'}';
+	}
 }

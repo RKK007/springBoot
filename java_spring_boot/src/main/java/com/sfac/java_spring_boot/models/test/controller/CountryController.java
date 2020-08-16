@@ -37,4 +37,22 @@ public class CountryController {
     public Country getCountryByCountryName(@RequestParam String countryName) {
         return countryServcie.getCountryByCountryName(countryName);
     }
+
+
+
+    /**
+     * 127.0.0.1/api/redis/country/522
+     * 通过传id到service层，存到redis缓存
+     */
+    @PostMapping("/redis/country/{countryId}")
+    public Country mograteCountoryByRedis(@PathVariable int countryId) {
+        Country country = countryServcie.mograteCountoryByRedis(countryId);
+        System.err.println("Controller层："+country);
+        return country;
+    }
+
+    public static void main(String[] args) {
+        //%d标识为数字，%s标识为小写字母，%S标识为大写字母
+        System.out.println(String.format("%d%s%S",255,"abc","abc"));
+    }
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>*** manager System</title>
+
+<!--    引入项目内部文件-->
+    <script th:src="${'/js/jquery-3.5.0.min.js'}" type="text/javascript"></script>
+
+<!--    引入外部文件-->
+    <script th:src="@{https://cdn.bootcss.com/layer/2.1/layer.js}" type="text/javascript"></script>
+</head>
+<body>
+        <!--引入模块-->
+        <div th:replace="fragments/header"></div>
+
+        <!--引入模块-->
+        <div th:replace="fragments/sidebar"></div>
+
+        <!--控制层的碎片组装器-->
+        <div th:if="${template}">
+            <div th:replace="${template}"></div>
+        </div>
+
+        <!--引入指定的footer模块-->
+        <div th:replace="fragments/footer::footer"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

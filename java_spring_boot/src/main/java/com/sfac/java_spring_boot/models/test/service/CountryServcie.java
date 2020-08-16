@@ -14,4 +14,7 @@ public interface CountryServcie {
 
     Country getCountryByCountryName(String countryName);
 
+    //读取存到redis，再通过redis读取
+    Country mograteCountoryByRedis(int countryId);
+
 }

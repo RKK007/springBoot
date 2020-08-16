@@ -202,4 +202,31 @@ public class Country {
 	public void setCities(List<City> cities) {
 		this.cities = cities;
 	}
+
+	@Override
+	public String toString() {
+		return "Country{" +
+				"countryId=" + countryId +
+				", countryName='" + countryName + '\'' +
+				", localCountryName='" + localCountryName + '\'' +
+				", countryCode='" + countryCode + '\'' +
+				", countryCode2='" + countryCode2 + '\'' +
+				", continent='" + continent + '\'' +
+				", region='" + region + '\'' +
+				", surfaceArea=" + surfaceArea +
+				", indepYear=" + indepYear +
+				", population=" + population +
+				", lifeExpectancy=" + lifeExpectancy +
+				", gnp=" + gnp +
+				", governmentForm='" + governmentForm + '\'' +
+				", headOfState='" + headOfState + '\'' +
+				", capital=" + capital +
+				", timeZone='" + timeZone + '\'' +
+				", languageId=" + languageId +
+				", currencyId=" + currencyId +
+				", dateModified=" + dateModified +
+				", dateCreated=" + dateCreated +
+				", cities=" + cities +
+				'}';
+	}
 }
