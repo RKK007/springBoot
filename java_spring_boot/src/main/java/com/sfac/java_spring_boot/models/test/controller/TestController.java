@@ -119,7 +119,7 @@ public class TestController {
     @Autowired
     private CountryServcie countryServcie;
 
-    //测试thymeleaf路径
+    //测试thymeleaf路径是否正常
     /*
      * 127.0.0.1/test/index ---get
      * */
