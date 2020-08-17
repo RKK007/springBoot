@@ -13,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -98,13 +100,15 @@ public class TestController {
 
     //项目启动测试
     /*
-    * 127.0.0.1:8086/test/testDesc ---get
+    * 127.0.0.1/test/testDesc?paramKey=fuck ---get
     * */
     @GetMapping("/testDesc")
     @ResponseBody
-    public String testDesc(){
-        return "<center style='color:green;'>This is my first springBoot</center>";
+    public String testDesc(@RequestParam("paramKey") String paramValue, HttpServletRequest request){
+        String param = request.getParameter("paramKey");
+        return "<center style='color:green;'>This is my first springBoot<h2>"+paramValue+"====="+param+"</h2></center>";
     }
+
 
 
 
@@ -117,9 +121,9 @@ public class TestController {
 
     //测试thymeleaf路径
     /*
-     * 127.0.0.1/test/thymeleaf ---get
+     * 127.0.0.1/test/index ---get
      * */
-    @GetMapping("/thymeleaf")
+    @GetMapping("/index")
     public String testIndexPage(ModelMap modelMap){
         int countryId = 522;
         List<City> cities = cityService.getCitiesByCountryId(countryId);//根据ID查询city和对应的国家
@@ -133,28 +137,13 @@ public class TestController {
         modelMap.addAttribute("baiduUrl", "/test/log");
         modelMap.addAttribute("city", cities.get(0));
         modelMap.addAttribute("shopLogo", "http://cdn.duitang.com/uploads/item/201308/13/20130813115619_EJCWm.thumb.700_0.jpeg");
-        modelMap.addAttribute("shopLogo", "/upload/111.png");
+        modelMap.addAttribute("shopLogo", "/upload/111.jpg");
         modelMap.addAttribute("country", country);
         modelMap.addAttribute("cities", cities);
-        modelMap.addAttribute("updateCityUri", "/api/city");
-        modelMap.addAttribute("template", "test/index");
+        modelMap.addAttribute("updateCityUri", "/api/updateCity");
+//        modelMap.addAttribute("template", "test/index");
 
         //返回外层碎片组装器index.html
         return "index";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

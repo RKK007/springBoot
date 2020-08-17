@@ -3,6 +3,7 @@ package com.sfac.java_spring_boot.models.test.service.impl;
 import com.github.pagehelper.PageHelper;
 
 import com.github.pagehelper.PageInfo;
+import com.sfac.java_spring_boot.aspect.ServiceAnnotation;
 import com.sfac.java_spring_boot.models.common.vo.Result;
 import com.sfac.java_spring_boot.models.common.vo.SearchVo;
 import com.sfac.java_spring_boot.models.test.dao.CityDao;
@@ -29,6 +30,7 @@ public class CityServiceImpl implements CityService {
     private CityDao cityDao;
 
     @Override
+    @ServiceAnnotation(value = "bbb")//进入切面
     public List<City> getCitiesByCountryId(int countryId) {
         return Optional
                 .ofNullable(cityDao.getCitiesByCountryId(countryId))
@@ -70,6 +72,7 @@ public class CityServiceImpl implements CityService {
         cityDao.deleteCity(city);
         return new Result<>(Result.ResultStatus.SUCCESS.status,"delete success",city);
     }
+
 
     @Override
     public PageInfo<City> getCitiesBySearchVoInfo(SearchVo searchVo) {

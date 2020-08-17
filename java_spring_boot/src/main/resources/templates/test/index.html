@@ -27,3 +27,27 @@ checkbox:<input type="text" th:attr="type=${changeType}" th:checked="${checked}"
 <a th:href="@{/test/index(pageSize=${city.cityId},currentPage='1')}" th:text="${city.cityName}"></a>
 <img th:src="@{${shopLogo}}"/>
 <p>==================================================================</p>
+
+
+<table>
+<tr th:each="city : ${cities}">
+    <td th:text="${city.cityId}"></td>
+    <td th:text="${city.cityName}"></td>
+    <td th:text="${city.countryId}"></td>
+</tr>
+</table>
+<select>
+    <option th:each="city,cityStatus : ${cities}" th:value="${city.cityId}" th:text="${city.cityName}"></option>
+</select>
+<p>==================================================================</p>
+
+
+
+<h3></h3>
+<form th:action="${updateCityUri}" method="post" th:object="${city}">
+    <input type="hidden" name="_method" value="PUT">
+    CityId:<input th:field="*{cityId}">
+    CityName:<input th:field="*{cityName}">
+    Local City Name:<input th:field="*{localCityName}">
+    <button type="submit">submit Info</button>
+</form>

@@ -75,6 +75,7 @@ public class CityController {
      */
     @PutMapping(value = "/updateCity", consumes = "application/x-www-form-urlencoded")
     public Result<City> updateCity(@ModelAttribute City city) {
+        System.err.println(city);
         return cityService.updateCity(city);
     }
 
@@ -87,6 +88,8 @@ public class CityController {
     public Result<City> deleteCity(@ModelAttribute City city) {
         return cityService.deleteCity(city);
     }
+
+
 }
 
 
