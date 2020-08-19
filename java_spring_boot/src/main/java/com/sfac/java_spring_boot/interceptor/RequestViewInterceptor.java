@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 @program:java_spring_boot
 @date:2020-08-17 10:28:16
 @description:
+1、注册为spring主键
+2、实现自HandlerInterceptor接口
+3、重写preHandle、postHandle、afterCompletion三个方法
 */
 @Component
 public class RequestViewInterceptor implements HandlerInterceptor {
@@ -38,7 +41,7 @@ public class RequestViewInterceptor implements HandlerInterceptor {
             return;
         }
 
-        String path = request.getServletPath();//获取请求路径
+        String path = request.getServletPath();//获取请求路径，path为请求的地址，例test/index
         String template = (String)modelAndView.getModelMap().get("template");
         if(StringUtils.isBlank(template)){
             if(path.startsWith("/")){
@@ -46,7 +49,6 @@ public class RequestViewInterceptor implements HandlerInterceptor {
             }
             modelAndView.getModelMap().addAttribute("template",path.toLowerCase());
         }
-
         HandlerInterceptor.super.preHandle(request,response,handler);
     }
 

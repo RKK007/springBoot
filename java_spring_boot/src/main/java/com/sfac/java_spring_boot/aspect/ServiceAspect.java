@@ -22,7 +22,7 @@ import java.util.Arrays;
 @description:
 AOP顺序：around->before->after
 */
-@Aspect//代表当前类为AOP
+@Aspect//代表当前类为AOP类
 @Component//注册为spring管理
 public class ServiceAspect {
     private final static Logger LOGGER = LoggerFactory.getLogger(RequestParamFilter.class);

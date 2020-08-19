@@ -5,18 +5,27 @@ import com.sfac.java_spring_boot.models.test.entity.Country;
 import com.sfac.java_spring_boot.models.test.service.CityService;
 import com.sfac.java_spring_boot.models.test.service.CountryServcie;
 import com.sfac.java_spring_boot.models.test.vo.ApplicationTest;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -146,4 +155,106 @@ public class TestController {
         //返回外层碎片组装器index.html
         return "index";
     }
+
+
+
+    //单文件上传
+    @PostMapping(value = "/file",consumes = "multipart/form-data")
+    public String fileUpload(@RequestParam MultipartFile file, RedirectAttributes redirectAttributes){
+        if(file.isEmpty()){
+            redirectAttributes.addFlashAttribute("message","Please select file!");
+            return "redirect:/test/index";
+        }
+        try {
+            String destFilePath = "D:\\UpLoad\\" + file.getOriginalFilename();
+            file.transferTo(new File(destFilePath));
+            redirectAttributes.addFlashAttribute("message","Upload file success!");
+        } catch (IOException e) {
+            redirectAttributes.addFlashAttribute("message","Upload file failed!");
+            e.printStackTrace();
+        }
+        return "redirect:/test/index";
+    }
+
+
+
+    //多文件上传
+    @PostMapping(value = "/files",consumes = "multipart/form-data")
+    public String fileUploads(@RequestParam MultipartFile[] files, RedirectAttributes redirectAttributes){
+        boolean empty = true;//假定文件没有选择
+        try {
+            for(MultipartFile file:files){
+                if(file.isEmpty()){
+                    continue;
+                }
+                String destFilePath = "D:\\UpLoad\\" + file.getOriginalFilename();
+                file.transferTo(new File(destFilePath));
+                empty = false;
+            }
+            if(empty){
+                redirectAttributes.addFlashAttribute("message","Please select file!");
+            }else{
+                redirectAttributes.addFlashAttribute("message","Upload file success!");
+            }
+        } catch (IOException e) {
+            redirectAttributes.addFlashAttribute("message","Upload file failed!");
+            e.printStackTrace();
+        }
+        return "redirect:/test/index";
+    }
+
+
+
+
+
+    //文件下载
+    @GetMapping(value = "/downloadFile")
+    public ResponseEntity<Resource> downFile(@RequestParam("fileName") String fileName){
+        try {
+            Resource resource = new UrlResource(Paths.get("D:\\Upload\\" + fileName).toUri());
+            String downName = new String(resource.getFilename().getBytes("utf-8"),"ISO8859-1");//处理文件名的编码格式
+            return ResponseEntity.ok().header("Content-Type","application/octet-stream")
+                    .header(HttpHeaders.CONTENT_DISPOSITION,String.format("attachment; filename=\"%s\"",downName))
+                    .body(resource);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
+    //文件名
+    private String fn;
+
+    //文件查看
+    @PostMapping(value = "/seeFile")
+    @ResponseBody
+    public String seeFile(@RequestParam("fileName") String fileName) throws Exception {
+        fn = fileName;
+        InputStream is = new FileInputStream("D:\\Upload\\"+fileName);
+        byte[] bytes = new byte[1024000];
+        int temp = is.read(bytes);
+        is.close();
+        return new String(bytes,0,temp);
+    }
+
+
+
+
+    //保存文件
+    @PostMapping(value = "saveFile")
+    @ResponseBody
+    public String saveFile(String innerText) throws IOException {
+        OutputStream outputStream = new FileOutputStream("D:\\UpLoad\\"+fn);
+        byte[] b = innerText.getBytes();//将字符串转为byte数组
+        outputStream.write(b);//全部写入
+        outputStream.flush();//刷新流
+        outputStream.close();
+        return "";
+    }
+
+
+
 }

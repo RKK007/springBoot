@@ -43,8 +43,10 @@ public class ControllerAspect {
     @Before(value = "com.sfac.java_spring_boot.aspect.ControllerAspect.controllerPointCut()")
     public void beforeController(JoinPoint joinPoint){
         LOGGER.debug("==============THIS IS BEFORE CONTROLLER=================");
+        //获取request的方法之一
         ServletRequestAttributes attributes = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
+
         LOGGER.debug("请求来源"+request.getRemoteAddr());
         LOGGER.debug("请求url"+request.getRequestURL().toString());
         LOGGER.debug("请求方法"+request.getMethod());

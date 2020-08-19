@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/test")
 public class AccountController {
     /**
-     * 127.0.0.1/account/log
+     * 127.0.0.1/test/log
      */
     @GetMapping("/log")
     public String usersPage(){

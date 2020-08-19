@@ -65,9 +65,6 @@ public class RedisConfig {
                 RedisSerializationContext.SerializationPair.fromSerializer(
                         new Jackson2JsonRedisSerializer(Object.class));
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig().serializeValuesWith(pair);
-        // default set
-//		RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
-
         return new RedisCacheManager(writer, config);
     }
 

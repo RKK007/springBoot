@@ -22,7 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @date:2020-08-11 10:28:19
 @description:
 */
-@Configuration
+@Configuration//该类为接口类
 @AutoConfigureAfter({WebMvcAutoConfiguration.class})
 public class WebMvcConfig implements WebMvcConfigurer {
     @Value("${server.http.port}")
@@ -48,6 +48,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 
 
+
     //注册request过滤器
     @Bean
     public FilterRegistrationBean<RequestParamFilter> register(){
@@ -65,22 +66,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(requestViewInterceptor).addPathPatterns("/**");//将所有请求拦截
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
