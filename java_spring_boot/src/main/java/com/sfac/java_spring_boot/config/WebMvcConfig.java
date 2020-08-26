@@ -13,7 +13,9 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /*
@@ -65,6 +67,38 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(requestViewInterceptor).addPathPatterns("/**");//将所有请求拦截
+    }
+
+
+
+
+
+
+
+    @Value("spring.resource.path")
+    private String relativePath;
+
+    @Value("spring.resource.path.pattern")
+    private String relativePathPattern;
+
+    @Value("spring.resource.folder.windows")
+    private String localPathForWindows;
+
+    @Value("spring.resource.folder.linux")
+    private String localPathForLinux;
+
+    //注册本地资源文件
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        String systemName = System.getProperty("os.name");
+        //判断系统的类型
+        if(systemName.toLowerCase().startsWith("win")){
+            registry.addResourceHandler(relativePathPattern)
+                    .addResourceLocations(ResourceUtils.FILE_URL_PREFIX+localPathForWindows);
+        }else{
+            registry.addResourceHandler(relativePathPattern)
+                    .addResourceLocations(ResourceUtils.FILE_URL_PREFIX+localPathForLinux);
+        }
     }
 }
 

@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 /**
  * @Description CityServiceImpl
  * @Author HymanHu
@@ -29,6 +28,7 @@ public class CityServiceImpl implements CityService {
     @Autowired
     private CityDao cityDao;
 
+
     @Override
     @ServiceAnnotation(value = "bbb")//进入切面
     public List<City> getCitiesByCountryId(int countryId) {
@@ -36,6 +36,7 @@ public class CityServiceImpl implements CityService {
                 .ofNullable(cityDao.getCitiesByCountryId(countryId))
                 .orElse(Collections.emptyList());
     }
+
 
     @Override
     public PageInfo<City> getCitiesBySearchVo(int countryId, SearchVo searchVo) {
@@ -65,6 +66,7 @@ public class CityServiceImpl implements CityService {
         return new Result<>(Result.ResultStatus.SUCCESS.status,"update success",city);
     }
 
+
     /*删除城市信息*/
     @Override
     @Transactional
@@ -82,4 +84,7 @@ public class CityServiceImpl implements CityService {
                 Optional.ofNullable(cityDao.getCitiesBySearchVo(searchVo))
                         .orElse(Collections.emptyList()));
     }
+
+
+
 }

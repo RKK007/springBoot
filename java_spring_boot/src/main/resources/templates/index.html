@@ -80,19 +80,19 @@
     <meta charset="UTF-8">
     <title>*** Manager System</title>
 
-    <!-- 引入css -->
-    <!-- <link th:href="@{http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css}" rel="stylesheet" > -->
-    <!-- <link th:href="${'/css/sbDemo.css'}" rel="stylesheet" /> -->
-    <link th:href="${'/vendors/bootstrap/dist/css/bootstrap.min.css'}" rel="stylesheet" />
+<!--     引入css -->
+<!--    <link th:href="@{http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css}" rel="stylesheet" > -->
+<!--    <link th:href="${'/css/sbDemo.css'}" rel="stylesheet" /> -->
+    <link th:href="${'/vendors/bootstrap/css/bootstrap.min.css'}" rel="stylesheet" />
     <link th:href="${'/vendors/font-awesome/css/font-awesome.min.css'}" rel="stylesheet" />
     <link th:href="${'/css/custom.css'}" rel="stylesheet" />
 
     <!-- 引入js -->
-    <script th:src="${'/vendors/jquery/dist/jquery.min.js'}" type="text/javascript"></script>
-    <script th:src="${'/vendors/bootstrap/dist/js/bootstrap.bundle.min.js'}" type="text/javascript"></script>
+    <script th:src="${'/vendors/jquery/jquery.min.js'}" type="text/javascript"></script>
+    <script th:src="${'/vendors/bootstrap/js/bootstrap.bundle.min.js'}" type="text/javascript"></script>
+    <script th:src="${'/vendors/bootbox/bootbox.js'}" type="text/javascript"></script>
     <!-- layer -->
-    <script th:src="@{https://cdn.bootcss.com/layer/2.1/layer.js}"
-            type="text/javascript"></script>
+    <script th:src="@{https://cdn.bootcss.com/layer/2.1/layer.js}" type="text/javascript"></script>
 </head>
 <body class="nav-md">
 <div class="container body">
@@ -103,14 +103,17 @@
         <!-- 引入碎片文件 header.html-->
         <div th:replace="fragments/header"></div>
 
-        <!-- body content -->
-        <div th:if="${template}">
-            <div th:replace="${template}"></div>
+        <div class="right_col" role="main">
+
+            <!-- body content -->
+            <div th:if="${template}">
+                <div th:replace="${template}"></div>
+            </div>
+
         </div>
 
         <!-- 引入碎片文件 footer.html-->
         <div th:replace="fragments/footer"></div>
-
 
     </div>
 </div>
@@ -118,6 +121,7 @@
 <script th:src="${'/js/custom.js'}" type="text/javascript"></script>
 </body>
 </html>
+
 <script>
     //查看&&编辑文件
     $("#see").click(function () {

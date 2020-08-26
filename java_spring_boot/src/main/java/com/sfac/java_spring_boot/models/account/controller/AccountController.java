@@ -1,6 +1,9 @@
 package com.sfac.java_spring_boot.models.account.controller;
 
+import com.sfac.java_spring_boot.models.account.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -12,13 +15,68 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @description:
 */
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/account")
 public class AccountController {
+    @Autowired
+    private UserService userService;
+
     /**
-     * 127.0.0.1/test/log
+     * 127.0.0.1/account/login ---- get
      */
-    @GetMapping("/log")
-    public String usersPage(){
+    @GetMapping("/login")
+    public String loginPage() {
+        return "indexSimple";
+    }
+
+    /**
+     * 127.0.0.1/account/register ---- get
+     */
+    @GetMapping("/register")
+    public String registerPage() {
+        return "indexSimple";
+    }
+
+    /**
+     * 127.0.0.1/account/users ---- get
+     */
+    @GetMapping("/users")
+    public String usersPage() {
         return "index";
+    }
+
+
+    /**
+     * 127.0.0.1/account/roles ---- get
+     */
+    @GetMapping("/roles")
+    public String rolesPage() {
+        return "index";
+    }
+
+    /**
+     * 127.0.0.1/account/resources ---- get
+     */
+    @GetMapping("/resources")
+    public String resourcesPage() {
+        return "index";
+    }
+
+    /**
+     * 127.0.0.1/account/profile ---- get
+     */
+    @GetMapping("/profile")
+    public String profilePage() {
+        return "index";
+    }
+
+
+    /**
+     * 127.0.0.1/account/logout ---- get
+     */
+    @GetMapping("/logout")
+    public String logout(ModelMap modelMap) {
+        userService.logout();
+        modelMap.addAttribute("template", "account/login");
+        return "indexSimple";
     }
 }

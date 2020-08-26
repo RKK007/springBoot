@@ -11,6 +11,7 @@ public class Result<T> {
     private final static int FAILD_CODE = 500;
 
 
+
     private int status;
     private String message;
     private T object;//任何对象
