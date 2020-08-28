@@ -28,4 +28,13 @@ public class CommonController {
     public String dashboard2Page() {
         return "index";
     }
+
+    /**
+     * 错误页面统一处理
+     * 127.0.0.1/common/403 ---- get
+     */
+    @GetMapping("/403")
+    public String errorPageFor403() {
+        return "index";
+    }
 }

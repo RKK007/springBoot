@@ -42,9 +42,8 @@ public class CityServiceImpl implements CityService {
     public PageInfo<City> getCitiesBySearchVo(int countryId, SearchVo searchVo) {
         searchVo.initSearchVo();//初始化searchVo，当前端没有传值的时候，给定一个初始值
         PageHelper.startPage(searchVo.getCurrentPage(), searchVo.getPageSize());
-        return new PageInfo<City>(
-                Optional.ofNullable(cityDao.getCitiesByCountryId(countryId))
-                        .orElse(Collections.emptyList()));
+        return new PageInfo<City>(Optional.ofNullable(cityDao.getCitiesByCountryId(countryId))
+                                          .orElse(Collections.emptyList()));
     }
 
 
@@ -84,7 +83,4 @@ public class CityServiceImpl implements CityService {
                 Optional.ofNullable(cityDao.getCitiesBySearchVo(searchVo))
                         .orElse(Collections.emptyList()));
     }
-
-
-
 }

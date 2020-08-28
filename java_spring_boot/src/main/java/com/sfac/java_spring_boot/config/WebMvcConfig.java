@@ -75,16 +75,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 
 
-    @Value("spring.resource.path")
+    @Value("${spring.resource.path}")
     private String relativePath;
 
-    @Value("spring.resource.path.pattern")
+    @Value("${spring.resource.path.pattern}")
     private String relativePathPattern;
 
-    @Value("spring.resource.folder.windows")
+    @Value("${spring.resource.folder.windows}")
     private String localPathForWindows;
 
-    @Value("spring.resource.folder.linux")
+    @Value("${spring.resource.folder.linux}")
     private String localPathForLinux;
 
     //注册本地资源文件

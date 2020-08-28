@@ -71,6 +71,7 @@ public class ShiroConfig {
         map.put("/api/login", "anon");
         map.put("/account/register", "anon");
         map.put("/api/user", "anon");
+        map.put("/account/profile","anon");
 
         //user权限代表该用户登陆过了就不会失效
         map.put("/common/**", "user");
